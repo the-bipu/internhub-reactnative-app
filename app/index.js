@@ -42,9 +42,9 @@ const Home = () => {
 
                     />
 
-                    {/* <Nearbyjobs 
+                    <Nearbyjobs 
 
-                    /> */}
+                    />
 
                 </View>
             </ScrollView>
