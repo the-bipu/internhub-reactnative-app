@@ -1,59 +1,46 @@
 import { useState } from "react";
-import { Text, View, ScrollView, SafeAreaView } from "react-native";
+
+import { View, ScrollView, SafeAreaView } from "react-native";
 import { Stack, useRouter } from "expo-router";
 
-import { COLORS, icons, images, SIZES } from '../constants';
-import { Nearbyjobs, Popularjobs, ScreenHeaderBtn, Welcome } from '../components';
+import { icons, images } from '../constants';
+import { Popularjobs, ScreenHeaderBtn, Welcome } from '../components';
 
 const Home = () => {
     const router = useRouter();
     const [searchTerm, setSearchTerm] = useState("")
-    
+
     return (
-        <SafeAreaView
-            style = {{flex: 1, backgroundColor: COLORS.lightWhite }}
-        >
+        <SafeAreaView className='flex bg-[#FAFAFC]'>
             <Stack.Screen
                 options={{
-                    headerStyle: {backgroundColor: COLORS.lightWhite},
                     headerShadowVisible: false,
                     headerLeft: () => (
-                        <ScreenHeaderBtn iconUrl={icons.menu} dimension="60%" />
+                        <ScreenHeaderBtn iconUrl={icons.menu} dimension="60%" className='bg-[#83829A] text-white' />
                     ),
                     headerRight: () => (
                         <ScreenHeaderBtn iconUrl={images.profile} dimension="100%" />
                     ),
                     headerTitle: ""
                 }}
+                className='bg-[#FAFAFC]'
             />
 
             <ScrollView showsVerticalScrollIndicator={false}>
-                <View
-                    style={{
-                        flex:1,
-                        padding: SIZES.medium
-                    }}
-                >
+                <View className='flex-1 p-4'>
 
-                    <Welcome 
+                    <Welcome
                         searchTerm={searchTerm}
                         setSearchTerm={setSearchTerm}
                         handleClick={() => {
-                            if(searchTerm) {
+                            if (searchTerm) {
                                 router.push(`/search/${searchTerm}`)
                             }
                         }}
-
                     />
-
-                    <Popularjobs 
-
-                    />
-
-                    <Nearbyjobs 
-
-                    />
-
+                    <Popularjobs />
+                    <Popularjobs />
+                    <Popularjobs />
                 </View>
             </ScrollView>
         </SafeAreaView>

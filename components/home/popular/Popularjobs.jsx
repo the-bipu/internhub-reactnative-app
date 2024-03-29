@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { View, Text, TouchableOpacity, FlatList, ActivityIndicator } from "react-native";
-import PopularJobCard from '../../common/cards/popular/PopularJobCard';
 import { useRouter } from "expo-router";
-import styles from "./popularjobs.style";
-import { COLORS, SIZES } from "../../../constants";
 import axios from "axios";
 
-const Popularjobs = () => {
+import PopularJobCard from '../../common/cards/popular/PopularJobCard';
+
+const Popularjobs = (item) => {
+  const { internship_name, img_link, location, heading_url, stipend } = item;
+
   const router = useRouter();
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -17,7 +18,7 @@ const Popularjobs = () => {
     const fetchData = async () => {
       setIsLoading(true);
       try {
-        const response = await axios.get("", {});
+        const response = await axios.get("https://internhub-ouzno5uqlbzy4urko5mvulxnh.vercel.app/internship/top6", {});
         if (response.data && response.data.internships) {
           setData(response.data.internships);
         } else {
@@ -35,51 +36,39 @@ const Popularjobs = () => {
   }, []);
 
   const handleCardPress = (item) => {
-    router.push(`/job-details/${item.job_id}`);
-    setSelectedJob(item.job_id);
+    router.push(`/job-details/${item.heading_url}`);
+    setSelectedJob(item.heading_url);
   };
 
   return (
-    <View style={styles.container}>
-      <View style={styles.header}>
-        <Text style={styles.headerTitle}>Popular jobs</Text>
+    <View className='mt-6'>
+      <View className='flex flex-row justify-between items-center'>
+        <Text className='text-xl font-bold text-[#312651]'>Popular jobs</Text>
         <TouchableOpacity>
-          <Text style={styles.headerBtn}>Show all</Text>
+          <Text className='font-medium text-base text-[#83829A]'>Show all</Text>
         </TouchableOpacity>
       </View>
 
-      <View style={styles.cardsContainer}>
+      <View className='mt-4'>
         {isLoading ? (
-          <ActivityIndicator size='large' color={COLORS.primary} />
+          <ActivityIndicator size='large' className='text-[#312651]' />
         ) : error ? (
           <Text>Something went wrong</Text>
         ) : (
           <>
-            {/* <FlatList>
-              {data.map((item, index) => (
-                <PopularJobCard
-                  key={index} // Assuming each item has a unique identifier, replace 'index' with the actual identifier
-                  item={item}
-                  selectedJob={selectedJob}
-                  handleCardPress={handleCardPress}
-                />
-              ))}
-            </FlatList> */}
             <FlatList
               horizontal
               data={data}
               renderItem={({ item, index }) => (
                 <PopularJobCard
-                  key={index} // Assuming each item has a unique identifier, replace 'index' with the actual identifier
+                  key={index}
                   item={item}
                   selectedJob={selectedJob}
                   handleCardPress={handleCardPress}
                 />
               )}
-              keyExtractor={(item, index) => index.toString()} // Use index as key as we don't have unique identifiers
+              keyExtractor={(item, index) => index.toString()}
             />
-            <Text>Hello</Text>
-            {/* <Text style={styles.fullData}>{JSON.stringify(data.internships[0], null, 2)}</Text> */}
           </>
         )}
       </View>
