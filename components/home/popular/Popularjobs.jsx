@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, TouchableOpacity, FlatList, ActivityIndicator } from "react-native";
+import { View, Text, TouchableOpacity, FlatList, ActivityIndicator, ScrollView } from "react-native";
 import { useRouter } from "expo-router";
 import axios from "axios";
 
@@ -43,7 +43,7 @@ const Popularjobs = (item) => {
   return (
     <View className='mt-6'>
       <View className='flex flex-row justify-between items-center'>
-        <Text className='text-xl font-bold text-[#312651]'>Popular jobs</Text>
+        <Text className='text-xl font-bold text-[#312651]'>Popular Internship</Text>
         <TouchableOpacity>
           <Text className='font-medium text-base text-[#83829A]'>Show all</Text>
         </TouchableOpacity>
@@ -55,21 +55,19 @@ const Popularjobs = (item) => {
         ) : error ? (
           <Text>Something went wrong</Text>
         ) : (
-          <>
-            <FlatList
-              horizontal
-              data={data}
-              renderItem={({ item, index }) => (
-                <PopularJobCard
-                  key={index}
-                  item={item}
-                  selectedJob={selectedJob}
-                  handleCardPress={handleCardPress}
-                />
-              )}
-              keyExtractor={(item, index) => index.toString()}
-            />
-          </>
+          <FlatList
+          horizontal
+            data={data}
+            renderItem={({ item, index }) => (
+              <PopularJobCard
+                key={index}
+                item={item}
+                selectedJob={selectedJob}
+                handleCardPress={handleCardPress}
+              />
+            )}
+            keyExtractor={(item, index) => index.toString()}
+          />
         )}
       </View>
     </View>
