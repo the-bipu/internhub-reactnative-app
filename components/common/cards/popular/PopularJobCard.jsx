@@ -4,7 +4,7 @@ import { checkImageURL } from '../../../../utils';
 import { useRouter } from "expo-router";
 
 const PopularJobCard = ({ item }) => {
-  const { internship_name, img_link, location, heading_url, stipend } = item;
+  const { internship_name, company_name, img_link, location, heading_url, stipend } = item;
   const router = useRouter();
 
   const handleCardPress = () => {
@@ -13,11 +13,10 @@ const PopularJobCard = ({ item }) => {
 
   return (
     <TouchableOpacity
-      // style={styles.container(selectedJob, item)}
-      className=' w-64 bg-[#3b3f80] p-4 rounded-xl flex justify-between shadow-lg shadow-white mr-2'
+      className=' w-64 bg-[#4873d1] p-4 rounded-xl flex justify-between shadow-lg shadow-white mr-2'
       onPress={() => handleCardPress()}
     >
-      <TouchableOpacity className=' w-14 h-14 bg-white flex items-center justify-center rounded-xl'>
+      <TouchableOpacity className=' w-14 h-14 bg-white flex items-center justify-center rounded-xl mb-2'>
         <Image
           source={{
             uri: checkImageURL(img_link)
@@ -29,13 +28,17 @@ const PopularJobCard = ({ item }) => {
         />
       </TouchableOpacity>
 
-      <Text className=' font-medium text-lg text-white mt-2' numberOfLines={1}>
-        {internship_name}
-      </Text>
+      <View className='flex flex-col gap-1'>
+        <Text className=' font-medium text-base text-white mt-2' numberOfLines={1}>
+          {internship_name}
+        </Text>
+        <Text className=' font-medium text-xs text-[#f4f4f4] mt-2' numberOfLines={1}>
+          {company_name}
+        </Text>
+      </View>
 
-      <View className='mt-8 w-full'>
+      <View className='mt-4 w-full'>
         <Text className=' text-gray-100' numberOfLines={1}>{location}</Text>
-        <Text className=' text-gray-100' numberOfLines={1}>{heading_url}</Text>
         <Text className=' text-gray-100' numberOfLines={1}>{stipend}</Text>
       </View>
     </TouchableOpacity>
