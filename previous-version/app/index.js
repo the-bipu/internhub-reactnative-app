@@ -17,7 +17,7 @@ const Home = () => {
     }
 
     return (
-        <SafeAreaView className='flex bg-[#ffffff] w-full h-full'>
+        <SafeAreaView className='flex-1 bg-[#ffffff] w-full h-full'>
             <Stack.Screen
                 options={{
                     headerShadowVisible: false,
