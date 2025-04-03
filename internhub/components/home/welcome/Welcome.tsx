@@ -11,7 +11,7 @@ const data = [
   { title: 'App Development', image: require("../../../assets/images/category/app-dev.jpg") },
 ];
 
-const Welcome = ({ searchTerm, setSearchTerm, handleClick }: any) => {
+const Welcome = ({ searchTerm, setSearchTerm }: any) => {
   const router = useRouter();
 
   return (
@@ -31,7 +31,7 @@ const Welcome = ({ searchTerm, setSearchTerm, handleClick }: any) => {
           />
         </View>
 
-        <TouchableOpacity style={styles.searchButton} onPress={handleClick}>
+        <TouchableOpacity style={styles.searchButton}>
           <Image
             source={require("../../../assets/images/search.png")}
             resizeMode='contain'
