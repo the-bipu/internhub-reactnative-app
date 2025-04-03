@@ -21,7 +21,7 @@ const Featuredjobs = () => {
         } else {
           setError("Data structure is not as expected");
         }
-      } catch (error) {
+      } catch (error: any) {
         setError(error);
         console.error("Error fetching data:", error);
       } finally {

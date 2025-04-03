@@ -1,18 +1,30 @@
-import React from 'react'
-import { TouchableOpacity, Image } from 'react-native'
+import React from 'react';
+import { TouchableOpacity, Image, StyleSheet } from 'react-native';
 
-import styles from './screenheader.style'
-
-const ScreenHeaderBtn = ({iconUrl, dimension, handlePress }: any) => {
+const ScreenHeaderBtn = ({ iconUrl, dimension, handlePress }: any) => {
   return (
-      <TouchableOpacity className='w-10 h-10 bg-white rounded-sm flex items-center justify-center' onPress={handlePress}>
-        <Image 
-          source={iconUrl} 
-          resizeMode='cover'
-          style={styles.btnImg(dimension)}
-        />
-      </TouchableOpacity>
-  )
-}
+    <TouchableOpacity style={styles.button} onPress={handlePress}>
+      <Image 
+        source={iconUrl} 
+        resizeMode='cover'
+        style={[styles.btnImg, { width: dimension, height: dimension }]}
+      />
+    </TouchableOpacity>
+  );
+};
+
+const styles = StyleSheet.create({
+  button: {
+    width: 40,
+    height: 40,
+    backgroundColor: 'white',
+    borderRadius: 4,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  btnImg: {
+    borderRadius: 6,
+  },
+});
 
 export default ScreenHeaderBtn;
